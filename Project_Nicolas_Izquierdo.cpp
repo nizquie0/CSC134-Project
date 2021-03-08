@@ -43,4 +43,38 @@ int main()
     cout << "\t 4. 3840 x 2160" << endl;
     cout << "Please select from the options above: "; //Ask the user to make a choice
     cin >> select; //Read in the user's input for monitor's resolution
+    
+    //Use if-else-if statement to handle the user's selection
+    if (select == 1)
+	{   
+    	perfScore = ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * 1; //Use formula to get the performance score
+        res = "1280 x 720";       
+    }
+    else if (select == 2)
+	{            
+        perfScore = ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * 0.75; //Use different numbers at the end according to multiplier
+        res = "1920 x 1080";    
+    }
+    else if (select == 3)
+	{           
+        perfScore = ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * 0.55;
+        res = "2560 x 1440";           
+    }
+    else if (select == 4)
+	{           
+        perfScore = ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * 0.35;
+        res = "3840 x 2160";       
+    }
+    else
+	{
+        cout << "Invalid input. Please enter 1, 2, 3, or 4! Program will terminate.";
+        return 0; //If the choice was not 1, 2, 3, or 4 then the program ends
+    }
+    
+    //Use if-else-if statement to assign recomended graphics quality to its respective performance score
+    if (perfScore > 17000) recQual = "Ultra";
+    else if ((perfScore > 15000) && (perfScore < 17000)) recQual = "High";
+    else if ((perfScore > 13000) && (perfScore < 15000)) recQual = "Medium";
+    else if ((perfScore > 11000) && (perfScore < 13000)) recQual = "Low";
+    else recQual = "Unable to Play";
 }//End Main
