@@ -77,4 +77,13 @@ int main()
     else if ((perfScore > 13000) && (perfScore < 15000)) recQual = "Medium";
     else if ((perfScore > 11000) && (perfScore < 13000)) recQual = "Low";
     else recQual = "Unable to Play";
+    
+    //Display the user's specs as well as performance results
+    cout << "\nComputer Hardware Graphics Quality Recommendation Tool\n" << endl;
+    cout << "GPU Clock Speed: " << gpuSpeed << "MHz" << endl;
+    cout << "CPU Clock Speed: " << cpuSpeed << "MHz" << endl;
+    cout << "Number of Cores: " << cpuNum << endl;
+    cout << "Monitor Resolution: " << res << endl;
+    cout << "Performance score: " << setprecision(2) << fixed << perfScore << endl;
+    cout << "Recommended Graphics Quality: " << recQual << endl;
 }//End Main
