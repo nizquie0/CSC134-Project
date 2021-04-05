@@ -5,14 +5,20 @@ using namespace std;
 
 int main()
 {
-	int gpuSpeed; //To hold the GPU clock speed value
-    int cpuSpeed; //To hold the CPU clock speed value
-    int cpuNum; //To hold the number of cores of the processor
-    int select; //To hold the user's choice from the resolution question
+	int gpuSpeed = 0; //To hold the GPU clock speed value
+    int cpuSpeed = 0; //To hold the CPU clock speed value
+    int cpuNum = 0; //To hold the number of cores of the processor
+    int select = 0; //To hold the user's choice from the resolution question
+    int compNum = 0; //To hold  the number of PCs being processed
     double perfScore = 0.0; //To hold the perfomrance score
     string res = "", recQual = ""; //To hold the monitor resolution as well as the recomended graphics quality
     
-    cout << "Please enter the clock speed (in Megahertz) of your graphics card: ";
+	cout << "How many computers are being processed? ";
+    cin >> compNum; //Read in the user's input for the number of computers being processed
+    
+    cout << "\nComputer Hardware Graphics Quality Recommendation Tool" << endl;
+    
+    cout << "\nPlease enter the clock speed (in Megahertz) of your graphics card: ";
     cin >> gpuSpeed; //Read in the user's input for clock speed of GPU
     if(gpuSpeed < 1) //Input validation to confirm the user entered a value
     {
