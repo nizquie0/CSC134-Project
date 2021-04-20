@@ -3,40 +3,40 @@
 #include <string> //Needed for using string class
 using namespace std;
 
+int gpuSpeed = 0; //To hold the GPU clock speed value
+int cpuSpeed = 0; //To hold the CPU clock speed value
+int cpuNum = 0; //To hold the number of cores of the processor
+int select = 0; //To hold the user's choice from the resolution question
+int compNum = 0; //To hold  the number of PCs being processed
+int num = 0; //To be used in the for loop
+double perfScore = 0.0; //To hold the perfomrance score
+double multi = 0.0; //To hold the multiplier value
+double highScore = 0.0, lowScore = 0.0; //To hold the highest and lowset scores for the running totals at the end
+string res = "", recQual = ""; //To hold the monitor resolution as well as the recomended graphics quality
+
+//Constants to hold the monitor's resolution
+const string RES1 = "1280 x 720";
+const string RES2 = "1920 x 1080";
+const string RES3 = "2560 x 1440";
+const string RES4 = "3840 x 2160";
+
+//Constants to hold the multiplier value accordingly to its multiplier
+const double MULTIPLIER_RES1 = 1;
+const double MULTIPLIER_RES2 = 0.75;
+const double MULTIPLIER_RES3 = 0.55;
+const double MULTIPLIER_RES4 = 0.35;
+
+//Constants to hold the performance threshold
+const string PERF_ULTRA = "Ultra";
+const string PERF_HIGH = "High";
+const string PERF_MED = "Medium";
+const string PERF_LOW = "Low";
+const string PERF_UNABLE = "Unable to Play";
+
+void displayTitle();
+
 int main()
 {
-	int gpuSpeed = 0; //To hold the GPU clock speed value
-    int cpuSpeed = 0; //To hold the CPU clock speed value
-    int cpuNum = 0; //To hold the number of cores of the processor
-    int select = 0; //To hold the user's choice from the resolution question
-    int compNum = 0; //To hold  the number of PCs being processed
-    int num = 0; //To be used in the for loop
-    double perfScore = 0.0; //To hold the perfomrance score
-    double multi = 0.0; //To hold the multiplier value
-    double highScore = 0.0, lowScore = 0.0; //To hold the highest and lowset scores for the running totals at the end
-    string res = "", recQual = ""; //To hold the monitor resolution as well as the recomended graphics quality
-    
-    //Constants to hold the monitor's resolution
-    const string RES1 = "1280 x 720";
-    const string RES2 = "1920 x 1080";
-    const string RES3 = "2560 x 1440";
-    const string RES4 = "3840 x 2160";
-    
-    //Constants to hold the multiplier value accordingly to its multiplier
-    const double MULTIPLIER_RES1 = 1;
-    const double MULTIPLIER_RES2 = 0.75;
-    const double MULTIPLIER_RES3 = 0.55;
-    const double MULTIPLIER_RES4 = 0.35;
-    
-    //Constants to hold the performance threshold
-    const string PERF_ULTRA = "Ultra";
-    const string PERF_HIGH = "High";
-    const string PERF_MED = "Medium";
-    const string PERF_LOW = "Low";
-    const string PERF_UNABLE = "Unable to Play";
-    
-    const string TITLE = "Computer Hardware Graphics Quality Recommendation Tool";
-    
 	cout << "How many computers are being processed? ";
     cin >> compNum; //Read in the user's input for the number of computers being processed
     
@@ -48,7 +48,7 @@ int main()
     	cin >> compNum;
 	}
 	
-	cout << "\n" << TITLE << endl;
+	displayTitle();
 	
 	//Run the loop for as many times as the user requested
 	for(num = 1; num <= compNum; num++)
@@ -150,3 +150,8 @@ int main()
 	cout << "\nThe highest performance score was: " << setprecision(2) << fixed << highScore << endl;
 	cout << "The lowest performance score was: " << setprecision(2) << fixed << lowScore << endl;
 }//End Main
+
+void displayTitle()
+{
+	cout << "\n" << "Computer Hardware Graphics Quality Recommendation Tool" << endl;
+}
