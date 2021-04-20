@@ -3,16 +3,6 @@
 #include <string> //Needed for using string class
 using namespace std;
 
-int gpuSpeed = 0; //To hold the GPU clock speed value
-int cpuSpeed = 0; //To hold the CPU clock speed value
-int cpuNum = 0; //To hold the number of cores of the processor
-int select = 0; //To hold the user's choice from the resolution question
-int compNum = 0; //To hold  the number of PCs being processed
-int num = 0; //To be used in the for loop
-double perfScore = 0.0; //To hold the perfomrance score
-double highScore = 0.0, lowScore = 0.0; //To hold the highest and lowset scores for the running totals at the end
-string recQual = ""; //To hold the monitor resolution as well as the recomended graphics quality
-
 //Constants to hold the monitor's resolution
 const string RES1 = "1280 x 720";
 const string RES2 = "1920 x 1080";
@@ -37,9 +27,19 @@ void displayTitle();
 string getResolutionString(int);
 double getMultiplierValue(int);
 double calculatePerformanceScore(int, int, int, double);
+string getRecommendedQuality(double);
 
 int main()
 {
+	int gpuSpeed = 0; //To hold the GPU clock speed value
+	int cpuSpeed = 0; //To hold the CPU clock speed value
+	int cpuNum = 0; //To hold the number of cores of the processor
+	int select = 0; //To hold the user's choice from the resolution question
+	int compNum = 0; //To hold  the number of PCs being processed
+	int num = 0; //To be used in the for loop
+	double perfScore = 0.0; //To hold the perfomrance score
+	double highScore = 0.0, lowScore = 0.0; //To hold the highest and lowset scores for the running totals at the end
+	
 	cout << "How many computers are being processed? ";
     cin >> compNum; //Read in the user's input for the number of computers being processed
     
@@ -103,20 +103,13 @@ int main()
     	
     	perfScore = calculatePerformanceScore(gpuSpeed, cpuNum, cpuSpeed, getMultiplierValue(select));
     	
-    	//Use if-else-if statement to assign recomended graphics quality to its respective performance score
-    	if (perfScore > 17000) recQual = PERF_ULTRA;
-    	else if ((perfScore > 15000) && (perfScore <= 17000)) recQual = PERF_HIGH;
-    	else if ((perfScore > 13000) && (perfScore <= 15000)) recQual = PERF_MED;
-    	else if ((perfScore > 11000) && (perfScore <= 13000)) recQual = PERF_LOW;
-    	else recQual = PERF_UNABLE;
-    	
     	//Display the user's specs as well as performance results
     	cout << "\nGPU Clock Speed: " << gpuSpeed << "MHz" << endl;
     	cout << "CPU Clock Speed: " << cpuSpeed << "MHz" << endl;
     	cout << "Number of Cores: " << cpuNum << endl;
     	cout << "Monitor Resolution: " << getResolutionString(select) << endl;
     	cout << "Performance score: " << setprecision(3) << fixed << perfScore << endl;
-    	cout << "Recommended Graphics Quality: " << recQual << endl;
+    	cout << "Recommended Graphics Quality: " << getRecommendedQuality(perfScore) << endl;
     	
     	//Check the largest and smallest value and apply them to their respective score
         if (num == 1) //This action will only be performed once in the first loop only 
@@ -180,4 +173,14 @@ double getMultiplierValue(int select)
 double calculatePerformanceScore(int gpuSpeed, int cpuNum, int cpuSpeed, double multi)
 {
 	return ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * multi; //Use formula to get the performance score
+}
+
+string getRecommendedQuality(double perfScore)
+{
+	//Use if-else-if statement to assign recomended graphics quality to its respective performance score
+    if (perfScore > 17000) return PERF_ULTRA;
+    else if ((perfScore > 15000) && (perfScore <= 17000)) return PERF_HIGH;
+    else if ((perfScore > 13000) && (perfScore <= 15000)) return PERF_MED;
+    else if ((perfScore > 11000) && (perfScore <= 13000)) return PERF_LOW;
+    else return PERF_UNABLE;
 }
