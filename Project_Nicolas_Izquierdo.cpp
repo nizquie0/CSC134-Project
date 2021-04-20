@@ -33,7 +33,9 @@ const string PERF_MED = "Medium";
 const string PERF_LOW = "Low";
 const string PERF_UNABLE = "Unable to Play";
 
+//Prototypes
 void displayTitle();
+string getResolutionString(int);
 
 int main()
 {
@@ -97,27 +99,23 @@ int main()
     		cout << "Please select from the options above: ";
     		cin >> select;
 		}
-    	
+
     	//Use if-else-if statement to handle the user's selection
     	if (select == 1)
 		{   
-    		multi = MULTIPLIER_RES1; //Use different numbers accordingly to multiplier
-            res = RES1;      
+    		multi = MULTIPLIER_RES1; //Use different numbers accordingly to multiplier     
     	}
     	else if (select == 2)
 		{            
-        	multi = MULTIPLIER_RES2;
-            res = RES2;    
+        	multi = MULTIPLIER_RES2;  
     	}
     	else if (select == 3)
 		{           
-        	multi = MULTIPLIER_RES3;
-            res = RES3;           
+        	multi = MULTIPLIER_RES3;       
     	}
     	else if (select == 4)
 		{           
-        	multi = MULTIPLIER_RES4;
-            res = RES4;       
+        	multi = MULTIPLIER_RES4;     
     	}
     	
     	perfScore = ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * multi; //Use formula to get the performance score
@@ -133,7 +131,7 @@ int main()
     	cout << "\nGPU Clock Speed: " << gpuSpeed << "MHz" << endl;
     	cout << "CPU Clock Speed: " << cpuSpeed << "MHz" << endl;
     	cout << "Number of Cores: " << cpuNum << endl;
-    	cout << "Monitor Resolution: " << res << endl;
+    	cout << "Monitor Resolution: " << getResolutionString(select) << endl;
     	cout << "Performance score: " << setprecision(3) << fixed << perfScore << endl;
     	cout << "Recommended Graphics Quality: " << recQual << endl;
     	
@@ -154,4 +152,24 @@ int main()
 void displayTitle()
 {
 	cout << "\n" << "Computer Hardware Graphics Quality Recommendation Tool" << endl;
+}
+
+string getResolutionString(int select)
+{
+	//Use awitch statement to handle the user's selection
+	switch(select)
+	{
+		case 1:
+			return RES1;
+			break;
+		case 2:
+			return RES2;
+			break;
+		case 3:
+			return RES3;
+			break;
+		case 4:
+			return RES4;
+			break;
+	}
 }
