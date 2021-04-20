@@ -28,6 +28,7 @@ string getResolutionString(int);
 double getMultiplierValue(int);
 double calculatePerformanceScore(int, int, int, double);
 string getRecommendedQuality(double);
+void displayInformation(int, int, int, string, double, string);
 
 int main()
 {
@@ -103,13 +104,7 @@ int main()
     	
     	perfScore = calculatePerformanceScore(gpuSpeed, cpuNum, cpuSpeed, getMultiplierValue(select));
     	
-    	//Display the user's specs as well as performance results
-    	cout << "\nGPU Clock Speed: " << gpuSpeed << "MHz" << endl;
-    	cout << "CPU Clock Speed: " << cpuSpeed << "MHz" << endl;
-    	cout << "Number of Cores: " << cpuNum << endl;
-    	cout << "Monitor Resolution: " << getResolutionString(select) << endl;
-    	cout << "Performance score: " << setprecision(3) << fixed << perfScore << endl;
-    	cout << "Recommended Graphics Quality: " << getRecommendedQuality(perfScore) << endl;
+    	displayInformation(gpuSpeed, cpuSpeed, cpuNum, getResolutionString(select), perfScore, getRecommendedQuality(perfScore));
     	
     	//Check the largest and smallest value and apply them to their respective score
         if (num == 1) //This action will only be performed once in the first loop only 
@@ -125,14 +120,21 @@ int main()
 	cout << "The lowest performance score was: " << setprecision(2) << fixed << lowScore << endl;
 }//End Main
 
+/*
+	displayTitle() Function
+	Displays title of the program
+*/
 void displayTitle()
 {
 	cout << "\n" << "Computer Hardware Graphics Quality Recommendation Tool" << endl;
-}
+}//End displayTitle
 
+/*
+	getResolutionString() Function
+	Use awitch statement to handle the user's selection and assign resolution choice
+*/
 string getResolutionString(int select)
 {
-	//Use awitch statement to handle the user's selection
 	switch(select)
 	{
 		case 1:
@@ -148,11 +150,14 @@ string getResolutionString(int select)
 			return RES4;
 			break;
 	}
-}
+}//End getResolutionString
 
+/*
+	getMultiplierValue() Function
+	Uses awitch statement to handle the user's selection and assign multiplier value
+*/
 double getMultiplierValue(int select)
 {
-	//Use awitch statement to handle the user's selection
 	switch(select)
 	{
 		case 1:
@@ -168,19 +173,40 @@ double getMultiplierValue(int select)
 			return MULTIPLIER_RES4;
 			break;
 	}
-}
+}//End getMultiplierValue
 
+/*
+	calculatePerformanceScore() Function
+	Uses formula to get the performance score
+*/
 double calculatePerformanceScore(int gpuSpeed, int cpuNum, int cpuSpeed, double multi)
 {
-	return ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * multi; //Use formula to get the performance score
-}
+	return ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * multi;
+}//End calculatePerformanceScore
 
+/*
+	getRecommendedQuality() Function
+	Uses if-else-if statement to assign recomended graphics quality to its respective performance score
+*/
 string getRecommendedQuality(double perfScore)
 {
-	//Use if-else-if statement to assign recomended graphics quality to its respective performance score
     if (perfScore > 17000) return PERF_ULTRA;
     else if ((perfScore > 15000) && (perfScore <= 17000)) return PERF_HIGH;
     else if ((perfScore > 13000) && (perfScore <= 15000)) return PERF_MED;
     else if ((perfScore > 11000) && (perfScore <= 13000)) return PERF_LOW;
     else return PERF_UNABLE;
-}
+}//End getRecommendedQuality
+
+/*
+	displayInformation() Function
+	Display the user's specs as well as performance results
+*/
+void displayInformation(int gpuSpeed, int cpuSpeed, int cpuNum, string res, double perfScore, string recQual)
+{
+    cout << "\nGPU Clock Speed: " << gpuSpeed << "MHz" << endl;
+    cout << "CPU Clock Speed: " << cpuSpeed << "MHz" << endl;
+    cout << "Number of Cores: " << cpuNum << endl;
+    cout << "Monitor Resolution: " << res << endl;
+    cout << "Performance score: " << setprecision(3) << fixed << perfScore << endl;
+    cout << "Recommended Graphics Quality: " << recQual << endl;
+}//End displayInformation
