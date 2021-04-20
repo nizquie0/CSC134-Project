@@ -36,6 +36,7 @@ const string PERF_UNABLE = "Unable to Play";
 void displayTitle();
 string getResolutionString(int);
 double getMultiplierValue(int);
+double calculatePerformanceScore(int, int, int, double);
 
 int main()
 {
@@ -100,7 +101,7 @@ int main()
     		cin >> select;
 		}
     	
-    	perfScore = ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * getMultiplierValue(select); //Use formula to get the performance score
+    	perfScore = calculatePerformanceScore(gpuSpeed, cpuNum, cpuSpeed, getMultiplierValue(select));
     	
     	//Use if-else-if statement to assign recomended graphics quality to its respective performance score
     	if (perfScore > 17000) recQual = PERF_ULTRA;
@@ -174,4 +175,9 @@ double getMultiplierValue(int select)
 			return MULTIPLIER_RES4;
 			break;
 	}
+}
+
+double calculatePerformanceScore(int gpuSpeed, int cpuNum, int cpuSpeed, double multi)
+{
+	return ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * multi; //Use formula to get the performance score
 }
