@@ -10,9 +10,8 @@ int select = 0; //To hold the user's choice from the resolution question
 int compNum = 0; //To hold  the number of PCs being processed
 int num = 0; //To be used in the for loop
 double perfScore = 0.0; //To hold the perfomrance score
-double multi = 0.0; //To hold the multiplier value
 double highScore = 0.0, lowScore = 0.0; //To hold the highest and lowset scores for the running totals at the end
-string res = "", recQual = ""; //To hold the monitor resolution as well as the recomended graphics quality
+string recQual = ""; //To hold the monitor resolution as well as the recomended graphics quality
 
 //Constants to hold the monitor's resolution
 const string RES1 = "1280 x 720";
@@ -36,6 +35,7 @@ const string PERF_UNABLE = "Unable to Play";
 //Prototypes
 void displayTitle();
 string getResolutionString(int);
+double getMultiplierValue(int);
 
 int main()
 {
@@ -99,26 +99,8 @@ int main()
     		cout << "Please select from the options above: ";
     		cin >> select;
 		}
-
-    	//Use if-else-if statement to handle the user's selection
-    	if (select == 1)
-		{   
-    		multi = MULTIPLIER_RES1; //Use different numbers accordingly to multiplier     
-    	}
-    	else if (select == 2)
-		{            
-        	multi = MULTIPLIER_RES2;  
-    	}
-    	else if (select == 3)
-		{           
-        	multi = MULTIPLIER_RES3;       
-    	}
-    	else if (select == 4)
-		{           
-        	multi = MULTIPLIER_RES4;     
-    	}
     	
-    	perfScore = ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * multi; //Use formula to get the performance score
+    	perfScore = ((5 * gpuSpeed) + (cpuNum * cpuSpeed)) * getMultiplierValue(select); //Use formula to get the performance score
     	
     	//Use if-else-if statement to assign recomended graphics quality to its respective performance score
     	if (perfScore > 17000) recQual = PERF_ULTRA;
@@ -170,6 +152,26 @@ string getResolutionString(int select)
 			break;
 		case 4:
 			return RES4;
+			break;
+	}
+}
+
+double getMultiplierValue(int select)
+{
+	//Use awitch statement to handle the user's selection
+	switch(select)
+	{
+		case 1:
+			return MULTIPLIER_RES1; //Use different numbers accordingly to multiplier 
+			break;
+		case 2:
+			return MULTIPLIER_RES2;
+			break;
+		case 3:
+			return MULTIPLIER_RES3; 
+			break;
+		case 4:
+			return MULTIPLIER_RES4;
 			break;
 	}
 }
